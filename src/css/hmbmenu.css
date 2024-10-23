@@ -5,7 +5,7 @@
         background: transparent;
         border: none;
         cursor: pointer;
-        font-size: 24px;
+        font-size: 2.8rem;
     }
 
     .menu {
@@ -20,7 +20,7 @@
         display: none;
         opacity: 0;
         transition: opacity 0.5s ease, transform 0.5s ease;
-        transform: translateY(-20px);
+        transform: translateY(-50px);
     }
 
     .menu.open {
@@ -35,7 +35,8 @@
         margin: 0;
 
         li {
-            padding: 10px 15px;
+            padding: 15px 25px;
+            font-size: 1.6rem;
             cursor: pointer;
         }
 

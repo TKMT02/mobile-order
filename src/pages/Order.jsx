@@ -11,18 +11,8 @@ export const Order = () => {
 
     const [juiceData, setJuiceData] = useState([]);
     const [toppingData, setToppingData] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [orderData, setOrderData] = useState([]);
-    const [tempOrderData, setTempOrderData] = useState({});
-    const [preorderData, setPreorderData] = useState([]);
-    const [toppingFlag, setToppingFlag] = useState([]);
-    const [onCart, setOnCart] = useState(true);
-    const [cartCount, setCartCount] = useState([]);
     const [nowStatus, setNowStatus] = useState('juice');
-    const [isModalVisible, setIsModalVisible] = useState(false);
-    const [noticeMsg, setNoticeMsg] = useState('');
-    const [showNotice, setShowNotice] = useState(false);
+;
 
     //  選択juice
     const [selectJuiceImage, setSelectJuiceImage] = useState("https://placehold.jp/350x450.png?text=aaa");
@@ -47,19 +37,10 @@ export const Order = () => {
                 setJuiceData(data.juice);
                 setToppingData(data.topping);
                 //  idを取得
-                const toppings = data.topping;
-                const toppingStatus = toppings.reduce((acc, topping) => {
-                    acc[topping.title] = false;
-                    return acc;
-                }, {});
-                setToppingFlag(toppingStatus);
-
-
-
             } catch (error) {
-                setError(error);
+                
             } finally {
-                setLoading(false);
+                
             }
         }
 
@@ -134,6 +115,9 @@ export const Order = () => {
                             <li className="topping_list-item">
                                 <p>チョコソース</p>
                             </li>
+                            <li className="topping_list-item none">
+                                
+                            </li>
                         </ul>
                         <p className="caption">
                             ※ドリンク1品につき、トッピングは2つまで選択可能です。
@@ -158,7 +142,6 @@ export const Order = () => {
                                     icon={faCircleXmark} className='icon'
                                 />
                             </p>
-
                             <p className="topping_content-title">
                                 トッピング選択
                             </p>
