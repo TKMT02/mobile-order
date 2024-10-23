@@ -1,0 +1,124 @@
+{
+    "juice": [
+        {
+            "id": "juice1",
+            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "title": "チェリーシュワシュワ",
+            "price": "150",
+            "explain": "赤をイメージとしたドリンクです。炭酸の味を堪能できます。"
+        },
+        {
+            "id": "juice2",
+            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "title": "ブルーバブル",
+            "price": "150",
+            "explain": "青色をイメージとしたドリンクです。ブルーハワイの味を堪能できます。"
+        },
+        {
+            "id": "juice3",
+            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "title": "レモンポップ",
+            "price": "150",
+            "explain": "黄色をイメージとしたドリンクです。レモンの炭酸を堪能できます。"
+        },
+        {
+            "id": "juice4",
+            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "title": "グレープジューシー",
+            "price": "150",
+            "explain": "紫色をイメージとしたドリンクです。ブドウの味を堪能できます。"
+        },
+        {
+            "id": "juice5",
+            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "title": "いちごミルクリボン",
+            "price": "150",
+            "explain": "ピンク色をイメージとしたドリンクです。いちごとミルクのミックスした味を堪能できます。"
+        },
+        {
+            "id": "juice6",
+            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "title": "オレンジスマイル",
+            "price": "150",
+            "explain": "オレンジ色をイメージとしたドリンクです。オレンジの味を堪能することができます。"
+        },
+        {
+            "id": "juice7",
+            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "title": "メロンピチピチ",
+            "price": "150",
+            "explain": "緑色をイメージとしたドリンクです。メロンの炭酸の味を堪能することができます。"
+        },
+        {
+            "id": "juice8",
+            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "title": "カルピスふわふわ",
+            "price": "150",
+            "explain": "白色をイメージとしたドリンクです。カルピスの味を堪能することができます。"
+        },
+        {
+            "id": "juice9",
+            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "title": "コーヒークラッシュ",
+            "price": "150",
+            "explain": "黒色をイメージとしたドリンクです。コーラの味を堪能することができます。"
+        },
+        {
+            "id": "juice10",
+            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "title": "ティータイムトリート",
+            "price": "150",
+            "explain": "茶色をイメージとしたドリンクです。ミルクティーの味を堪能できます。"
+        }
+    ],
+    "topping": [
+        {
+            "id": "topping1",
+            "imageURL": "https://placehold.jp/320x180.png?text=IMAGE",
+            "title": "チョコソース",
+            "explain": "濃厚なチョコソースのトッピングです。"
+        },
+        {
+            "id": "topping2",
+            "imageURL": "https://placehold.jp/320x180.png?text=IMAGE",
+            "title": "アイスクリーム",
+            "explain": "濃厚なバニラアイスクリームのトッピングです。"
+        },
+        {
+            "id": "topping3",
+            "imageURL": "https://placehold.jp/320x180.png?text=IMAGE",
+            "title": "タピオカ",
+            "explain": "もちもちしたタピオカのトッピングです。"
+        },
+        {
+            "id": "topping4",
+            "imageURL": "https://placehold.jp/320x180.png?text=IMAGE",
+            "title": "ホイップクリーム",
+            "explain": "濃厚なホイップのトッピングです。"
+        },
+        {
+            "id": "topping5",
+            "imageURL": "https://placehold.jp/320x180.png?text=IMAGE",
+            "title": "ナタデココ",
+            "explain": "おいしいゼリー状の四角いのトッピングです。"
+        },
+        {
+            "id": "topping6",
+            "imageURL": "https://placehold.jp/320x180.png?text=IMAGE",
+            "title": "カットフルーツ(各種)",
+            "explain": "おいしいカットフルーツのトッピングです。"
+        },
+        {
+            "id": "topping7",
+            "imageURL": "https://placehold.jp/320x180.png?text=IMAGE",
+            "title": "マシュマロ",
+            "explain": "しろーいマシュマロのトッピングです。"
+        },
+        {
+            "id": "topping8",
+            "imageURL": "https://placehold.jp/320x180.png?text=IMAGE",
+            "title": "オレオ・クッキー",
+            "explain": "濃厚なオレオクッキーのトッピングです。"
+        }
+    ]
+}

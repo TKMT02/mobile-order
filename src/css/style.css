@@ -1,0 +1,561 @@
+/* ======= Reset Styles ======= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: var(--color-sub);
+}
+
+html {
+    font-size: 62.5%;
+}
+
+:root {
+    --color-main: #F8DEFF;
+    --color-sub: #EDB9D1;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Cherry+Bomb+One&display=swap');
+
+/* スタート画面 */
+
+.start_container {
+    width: 100%;
+    height: 100vh;
+    background-color: var(--color-main);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    .click_content {
+        padding: 60% 80px;
+        background-color: transparent;
+    }
+
+    .logo-image {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+
+    .start_message {
+        font-size: 1.8rem;
+        font-weight: bold;
+        padding: 100px 0;
+        text-align: center;
+        animation: startmsg 2s infinite ease-in-out;
+    }
+
+    .footer-text {
+        font-size: 1.4rem;
+        font-weight: bold;
+        position: absolute;
+        left: 50%;
+        bottom: 20px;
+        transform: translateX(-50%);
+    }
+}
+
+@keyframes startmsg {
+    0% {
+        transform: scale(1.0);
+    }
+
+    50% {
+        transform: scale(1.2);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.start_modal {
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .modal_content {
+        margin: 25px auto 10px;
+
+        .modal-text {
+            font-size: 1.4rem;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .modal-text-s {
+            font-size: 1rem;
+            text-align: center;
+        }
+
+        .start_input {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 12px;
+            margin: 10px;
+        }
+    }
+
+    .start_modal_btn {
+        display: block;
+        margin: 30px auto 0;
+        color: #fff;
+        font-size: 1.6rem;
+        font-weight: bold;
+        background: var(--color-sub);
+        padding: 10px 80px;
+        border: none;
+        border-radius: 24px;
+        box-shadow: 3px 3px 5px 0px rgba(0, 0, 0, 0.4);
+    }
+}
+
+
+/* ヘッダースタイル */
+
+.header {
+    width: 100%;
+    height: 80px;
+    background: #fff;
+
+    h1 {
+        width: 100%;
+        height: 80px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .header_image {
+            width: 50%;
+            height: auto;
+            display: block;
+        }
+    }
+}
+
+.sub-header {
+    width: 100%;
+    height: 25px;
+    padding: 0 20px;
+    background: #fff;
+    display: flex;
+    align-items: last baseline;
+    justify-content: space-between;
+
+    p {
+        font-size: 1.4rem;
+    }
+
+    .product_list-text {
+        font-size: 1.8rem;
+    }
+}
+
+/* フッタースタイル */
+
+.footer {
+    width: 100%;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #fff;
+
+    .footer-text {
+        font-size: 1.4rem;
+        text-align: center;
+        color: #000;
+    }
+}
+
+/* オーダースタイル */
+
+.container {
+    width: 100%;
+    height: auto;
+    background: var(--color-main);
+    padding-bottom: 50px;
+
+    .note {
+        width: 85%;
+        font-weight: bold;
+        margin: 50px auto 0;
+        font-size: 1.2rem;
+        text-align: left;
+    }
+}
+
+.fixed_content {
+    position: sticky;
+    top: 0;
+}
+
+.catalog_content {
+    width: 95%;
+    margin: 0 auto;
+    height: auto;
+}
+
+.catalog_list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding: 25px 0;
+}
+
+/* カタログアイテムのスタイル */
+
+.catalog_list-item {
+    width: 46%;
+    background: #fff;
+    border-radius: 24px;
+    margin: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 4px 5px 5px -3px rgba(0, 0, 0, 0.4);
+
+    .item-image {
+        width: 100%;
+        height: auto;
+    }
+
+    .item-name {
+        font-size: 1.8rem;
+        padding: 4px 8px;
+        font-family: "Cherry Bomb One", system-ui;
+        font-weight: 400;
+        font-style: normal;
+    }
+
+    .item-explain {
+        font-size: 1.15rem;
+        padding: 2px 10px 12px;
+    }
+
+    .item-button {
+        width: 80%;
+        padding: 5px 0;
+        border: 1.5px solid #000;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        background: #fff;
+        font-weight: bold;
+        color: #000;
+    }
+}
+
+/* トッピング一覧 */
+
+.topping_content {
+    width: 95%;
+    margin: 0 auto;
+    height: auto;
+    background: #fff;
+    border-radius: 24px;
+    padding: 30px;
+    box-shadow: 4px 5px 5px -3px rgba(0, 0, 0, 0.4);
+
+    .topping_title {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    .topping_list {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: start;
+
+        .topping_list-item {
+            width: 40%;
+            margin: 0 auto;
+            font-size: 1.6rem;
+            padding: 3px 0;
+        }
+    }
+
+    .caption {
+        font-size: 1.25rem;
+        margin-top: 20px;
+    }
+}
+
+
+/* トッピングモーダル */
+
+.topping_content_modal {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    inset: 0;
+    background: hsla(0, 0%, 0%, 0.5);
+
+    .topping_content {
+        width: 100%;
+        border-radius: 24px 24px 0 0;
+        padding: 5px 0 0;
+        position: fixed;
+        bottom: 0;
+
+        .topping_content-head {
+            .topping_content-title {
+                font-size: 1.6rem;
+                font-weight: bold;
+                text-align: center;
+                padding: 8px 0;
+            }
+
+            .icon {
+                display: block;
+                margin: 0 auto;
+                font-size: 3.2rem;
+                padding: 15px 0 20px;
+            }
+
+
+            .topping_contents {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                padding: 15px 5px;
+
+                img {
+                    width: 40%;
+                    height: auto;
+                    display: block;
+                }
+
+                .title {
+                    width: 50%;
+                    font-size: 1.8rem;
+                    text-align: center;
+                    font-family: "Cherry Bomb One", system-ui;
+                    font-weight: 400;
+                    font-style: normal;
+                }
+            }
+        }
+
+        .topping_content-body {
+            width: 100%;
+            padding: 10px 5% 30px;
+            display: flex;
+            flex-wrap: wrap;
+            margin: 0 auto;
+            background-color: var(--color-main);
+            border-top: 8px solid #E9CDE0;
+
+            .topping_content-body-head {
+                .title {
+                    font-size: 2rem;
+                    font-weight: 600;
+                }
+
+                .note {
+                    font-size: 1.2rem;
+                    padding: 3px 0;
+                }
+            }
+
+            .topping_list {
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                margin: 15px auto;
+                background-color: var(--color-main);
+
+                .topping_list-item {
+                    width: 48%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 5px 5px;
+                    margin: 3px;
+                    border: 1px solid #000;
+
+                    .check_icon {
+                        font-size: 0.9lh;
+                        margin-left: 5px;
+                    }
+                }
+            }
+
+            .addCart {
+                display: block;
+                width: 80%;
+                margin: 20px auto 15px;
+                padding: 10px 0;
+                font-size: 1.8rem;
+                font-weight: bold;
+                font-family: 'Inter';
+                color: #fff;
+                background: var(--color-sub);
+                border: none;
+                border-radius: 24px;
+            }
+        }
+    }
+}
+
+/* カート */
+
+.cart_container {
+    width: 100%;
+    height: auto;
+    background: var(--color-main);
+    padding: 30px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .cart_content {
+        width: 90%;
+        margin: 0 auto;
+        height: auto;
+        border-radius: 24px;
+        background: #fff;
+        box-shadow: 0px 0px 10px -2px rgba(0, 0, 0, 0.4);
+
+        .cart_title {
+            font-size: 2.4rem;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .cart_content-head {
+            width: 80%;
+            margin: 0 auto;
+
+            .cart_content_title {
+                font-size: 1.6rem;
+                font-weight: bold;
+            }
+
+            .cart_content_explain {
+                font-size: 1.4rem;
+                padding: 20px 0 20px 40px;
+
+                ul {
+                    li {
+                        list-style: none;
+                    }
+                }
+            }
+        }
+
+        .cart_content-body {
+            width: 90%;
+            margin: 0 auto;
+
+            .cart_content_title {
+                font-size: 1.6rem;
+                font-weight: bold;
+            }
+        }
+
+        .cart_content-footer {
+            width: 90%;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+
+            p {
+                font-size: 1.8rem;
+                font-weight: bold;
+                margin: 15px 0;
+            }
+        }
+
+        .note {
+            width: 80%;
+            margin: 0 auto 40px;
+            font-size: 1.2rem;
+        }
+
+        .orderbutton {
+            display: block;
+            width: 60%;
+            margin: 20px auto 15px;
+            padding: 12px 0;
+            font-size: 1.8rem;
+            font-weight: bold;
+            font-family: 'Inter';
+            color: #fff;
+            background: var(--color-sub);
+            border: none;
+            border-radius: 24px;
+        }
+    }
+}
+
+/* カートカード */
+
+.cart_content_list-item {
+    width: 100%;
+    height: auto;
+    border: 3px solid var(--color-sub);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 20px auto;
+
+    .cart_content-list-item-image {
+        width: 30%;
+        border-radius: 6px 0 0 6px;
+        height: auto;
+        display: block;
+    }
+
+    .cart_content-list-item_body {
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+
+        .cart_content-title {
+            font-size: 1.8rem;
+        }
+
+        .cart_topping_list {
+            list-style: none;
+            display: flex;
+            justify-content: start;
+            flex-direction: row;
+            gap: 10px;
+            padding: 3px 3px 3px 0;
+
+            .cart_topping_list-item {
+                font-size: 1.2rem;
+                border: 1px solid #000;
+                padding: 2px 4px;
+            }
+        }
+
+        .deletebutton {
+            display: block;
+            width: 30%;
+            margin: 20px 20px 0 auto;
+            padding: 4px 0;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: 'Inter';
+            color: #fff;
+            background: #ff7f76;
+            border: none;
+            border-radius: 24px;
+        }
+    }
+}
