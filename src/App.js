@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import './css/style.css';
+import './css/card.css';
 import { Start } from './pages/Start';
 import { Order } from './pages/Order';
 import { Cart } from './pages/Cart';
+import { Option } from './pages/Option';
 
 function App() {
 
@@ -27,6 +29,7 @@ function App() {
                     <Route path="/" element={<Start />} />
                     <Route path="/order" element={<Order />} />
                     <Route path="/cart" element={<Cart />} />
+                    <Route path="/option" element={<Option />} />
                 </Routes>
             </BrowserRouter>
             {/* } */}
