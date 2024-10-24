@@ -2,6 +2,7 @@ import React, { useEffect, useState, forwardRef } from 'react';
 import { Header } from '../component/Header';
 import { MyCard } from '../component/MyCard';
 import { NameChange } from '../component/NameChange';
+import { History_card } from '../component/History_card';
 
 export const Option = () => {
 
@@ -10,11 +11,15 @@ export const Option = () => {
     const [isModalShow_Card, setIsModalShow_Card] = useState(false);
     const [isModalShow_NameChange, setIsModalShow_NameChange] = useState(false);
     const [isTwoFingerTap, setIsTwoFingerTap] = useState(false);
+    const [cartCount, setCartCount] = useState(0);
+    const [history_cart, setHistory_cart] = useState([]);
+
 
     useEffect(() => {
 
         setUserID(localStorage.getItem("userID"));
         setUserName(localStorage.getItem("userName"));
+        handleUpdateCount();
 
         return
     }, [])
@@ -44,10 +49,19 @@ export const Option = () => {
         }
     };
 
+    //  カウント処理
+    const handleUpdateCount = () => {
+        const Count_n = JSON.parse(localStorage.getItem("cart")) || [];
+        const Count_t = JSON.parse(localStorage.getItem("temp_cart")) || [];
+        const SumCartCount = Count_n.length + Count_t.length;
+        console.log(SumCartCount);
+        setCartCount(SumCartCount);
+    }
+
 
     return (
         <>
-            <Header />
+            <Header cartCount={cartCount} />
             <div className="options_container">
                 <p className="userid">
                     商品引き換え番号: <strong>{UserID}</strong>
@@ -82,6 +96,32 @@ export const Option = () => {
                 <button type="button" className="showMyCard" onClick={() => handleModalMyCard(true)}>
                     受取カードを表示
                 </button>
+                <h2 className="title">
+                    これまでの注文一覧
+                </h2>
+                <ul className="history_list">
+                    {
+                        history_cart.map((item, index) => {
+                            if (history_cart.length > 0) {                                
+                                return (
+                                    <History_card
+                                        id={index}
+                                        juice={item.juice}
+                                        topping_01={item.topping01}
+                                        topping_02={item.topping02}
+                                        timestamp={item.timestamp}
+                                    />
+                                );
+                            } else {
+                                return (
+                                    <li>
+                                        <p>注文履歴がありません</p>
+                                    </li>
+                                );
+                            }
+                        })
+                    }
+                </ul>
 
                 {isModalShow_Card && (
                     <MyCard

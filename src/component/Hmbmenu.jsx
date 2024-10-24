@@ -1,7 +1,7 @@
-import { React, useState } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTimes , faBars } from '@fortawesome/free-solid-svg-icons';
+import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
 import "../css/hmbmenu.css";
 
 export const Hmbmenu = () => {
@@ -13,13 +13,13 @@ export const Hmbmenu = () => {
         setIsOpen(!isOpen);
     };
 
-    const handleMenu = (e) =>{
+    const handleMenu = (e) => {
         console.log(e);
-        if(e == "menu"){
+        if (e == "menu") {
             nav('/order');
-        } else if (e == "option"){
+        } else if (e == "option") {
             nav('/option');
-        } else if (e == "cart"){
+        } else if (e == "cart") {
             nav('/cart');
         }
     }
@@ -37,7 +37,7 @@ export const Hmbmenu = () => {
                 <ul>
                     <li onClick={() => handleMenu('menu')}>メニュー</li>
                     <li onClick={() => handleMenu('option')}>オプション</li>
-                    <li onClick={() => handleMenu('cart')}>カート</li>
+                    <li onClick={() => handleMenu('cart')} >カート </li>
                 </ul>
             </div>
         </div>

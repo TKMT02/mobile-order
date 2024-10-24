@@ -4,6 +4,7 @@
             "id": "juice1",
             "imageURL": "https://placehold.jp/250x250.png?text=????",
             "title": "チェリーシュワシュワ",
+            "color": "red",
             "price": "150",
             "explain": "赤をイメージとしたドリンクです。炭酸の味を堪能できます。"
         },
@@ -11,6 +12,7 @@
             "id": "juice2",
             "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
             "title": "ブルーバブル",
+            "color": "blue",
             "price": "150",
             "explain": "青色をイメージとしたドリンクです。ブルーハワイの味を堪能できます。"
         },
@@ -18,6 +20,7 @@
             "id": "juice3",
             "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
             "title": "レモンポップ",
+            "color": "yellow",
             "price": "150",
             "explain": "黄色をイメージとしたドリンクです。レモンの炭酸を堪能できます。"
         },
@@ -25,6 +28,7 @@
             "id": "juice4",
             "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
             "title": "グレープジューシー",
+            "color": "purple",
             "price": "150",
             "explain": "紫色をイメージとしたドリンクです。ブドウの味を堪能できます。"
         },
@@ -32,6 +36,7 @@
             "id": "juice5",
             "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
             "title": "いちごミルクリボン",
+            "color": "pink",
             "price": "150",
             "explain": "ピンク色をイメージとしたドリンクです。いちごとミルクのミックスした味を堪能できます。"
         },
@@ -39,6 +44,7 @@
             "id": "juice6",
             "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
             "title": "オレンジスマイル",
+            "color": "orange",
             "price": "150",
             "explain": "オレンジ色をイメージとしたドリンクです。オレンジの味を堪能することができます。"
         },
@@ -46,6 +52,7 @@
             "id": "juice7",
             "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
             "title": "メロンピチピチ",
+            "color": "green",
             "price": "150",
             "explain": "緑色をイメージとしたドリンクです。メロンの炭酸の味を堪能することができます。"
         },
@@ -53,6 +60,7 @@
             "id": "juice8",
             "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
             "title": "カルピスふわふわ",
+            "color": "white",
             "price": "150",
             "explain": "白色をイメージとしたドリンクです。カルピスの味を堪能することができます。"
         },
@@ -60,6 +68,7 @@
             "id": "juice9",
             "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
             "title": "コーヒークラッシュ",
+            "color": "black",
             "price": "150",
             "explain": "黒色をイメージとしたドリンクです。コーラの味を堪能することができます。"
         },
@@ -67,6 +76,7 @@
             "id": "juice10",
             "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
             "title": "ティータイムトリート",
+            "color": "brown",
             "price": "150",
             "explain": "茶色をイメージとしたドリンクです。ミルクティーの味を堪能できます。"
         }

@@ -10,12 +10,6 @@ export const Header = (props) => {
 
     const navigate = useNavigate();
     const [isModalOpen, setIsModalOpen] = useState(false);
-    // // props.headerTitleが変更されたときだけsetTitleを実行
-    // useEffect(() => {
-    //     if (props.headerTitle) {
-    //         setTitle(props.headerTitle);
-    //     }
-    // }, [props.headerTitle]); // props.headerTitleが変わったときのみ実行
 
     const handleMenu = () => {
         setIsModalOpen(true);
@@ -25,16 +19,26 @@ export const Header = (props) => {
         navigate("/cart");
     }
 
+    const handleOrder = () => {
+        navigate("/order");
+    }
+
     const closeModal = () => setIsModalOpen(false);
 
     return (
         <header className="header">
             <Hmbmenu />
-            <h1>
+            <h1 onClick={handleOrder}>
                 <img src={Logo} alt="クラフト推しドリンク" className='header_image' />
             </h1>
-            <FontAwesomeIcon icon={faCartShopping} className='icon' onClick={handleCart} onTouchStart={handleCart} />
-
-        </header>
+            <p className={props.cartCount ? 'icon cart count' : 'cart icon'}
+                data-count={props.cartCount}
+                onClick={handleCart}
+                onTouchStart={handleCart}>
+                <FontAwesomeIcon
+                    icon={faCartShopping}
+                />
+            </p>
+        </header >
     );
 };

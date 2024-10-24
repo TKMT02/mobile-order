@@ -19,6 +19,7 @@ export const Order = () => {
     //  注文データ処理
     const [preorderData, setPreorderData] = useState([]);
     const [cart_content, setCart_content] = useState([]);
+    const [cartCount, setCartCount] = useState(0);
 
     //  通知処理
     const [noticeMsg, setNoticeMsg] = useState('');
@@ -61,16 +62,13 @@ export const Order = () => {
         }
 
         fetchData();
-
-        // setCartCount(JSON.parse(localStorage.getItem("cart")).length);
+        handleUpdateCount();
     }, [])
 
     //  注文キャンセル
     const handleCloseTopping = () => {
         setNowStatus("juice");
-        // 既存の状態を変更しないため、新しいオブジェクトを作成
         const updatedToppingFlag = { ...toppingFlag };
-        // console.log(toppingFlag);
         toppingData.forEach(e => {
             updatedToppingFlag[e.title] = false;
         });
@@ -79,7 +77,6 @@ export const Order = () => {
         setToppingFlag(updatedToppingFlag);
         setPreorderData([]);
         document.body.style.overflow = 'auto';
-        // console.log(updatedToppingFlag); 
     }
 
     //  ジュースの追加
@@ -152,9 +149,19 @@ export const Order = () => {
         //  ローカルストレージに追加
         localStorage.setItem("temp_cart", JSON.stringify(temp_cartData));
         //  リセットと通知
+        handleUpdateCount();
         handleCloseTopping();
         handleNotice("カートに追加しました。");
         console.log(cart_content);
+    }
+
+    //  カウント処理
+    const handleUpdateCount = () => {
+        const Count_n = JSON.parse(localStorage.getItem("cart")) || [];
+        const Count_t = JSON.parse(localStorage.getItem("temp_cart")) || [];
+        const SumCartCount = Count_n.length + Count_t.length;
+        console.log(SumCartCount);
+        setCartCount(SumCartCount);
     }
 
     //  通知処理
@@ -177,7 +184,7 @@ export const Order = () => {
                     />
                 )}
                 <div className="fixed_content">
-                    <Header />
+                    <Header cartCount={cartCount} />
                     <div className="sub-header">
                         <p className='product_list-text'>商品一覧</p>
                         <p>全品一律150円</p>
@@ -190,6 +197,7 @@ export const Order = () => {
                                 <Catalog_card
                                     key={index}
                                     id={item.id}
+                                    color={item.color}
                                     imageURL={item.imageURL}
                                     title={item.title}
                                     explain={item.explain}

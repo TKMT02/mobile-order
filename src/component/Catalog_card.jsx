@@ -4,8 +4,8 @@ export const Catalog_card = (props) => {
     return (
         <>
             <li className="catalog_list-item">
-                <img src={props.imageURL} alt="商品名" className='item-image'/>
-                <h2 className="item-name">
+                <img src={props.imageURL} alt="商品名" className='item-image' width={300} height={300} loading='lazy' />
+                <h2 className={`${props.color} item-name `} >
                     {props.title}
                 </h2>
                 <p className="item-explain">

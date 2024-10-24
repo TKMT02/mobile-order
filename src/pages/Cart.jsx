@@ -1,14 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import  { React, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '../component/Header';
 import { Cart_item } from '../component/Cart_item';
+
 
 export const Cart = () => {
 
     const [sum_price, setSum_price] = useState(0);
     const [juiceData, setJuiceData] = useState([]);
-
+    const [cartCount, setCartCount] = useState(0);
+    const [orderOK, setOrderOK] = useState(true);
 
     const [cart, setCart] = useState([]);
+    const nav = useNavigate();
 
     useEffect(() => {
 
@@ -45,6 +49,7 @@ export const Cart = () => {
             const CartData = [...nowCartData, ...tempCartData];
             localStorage.setItem("cart", JSON.stringify(CartData));
             localStorage.removeItem("temp_cart");
+            setOrderOK(false);
         }
 
         // cart が存在する場合、データをセット
@@ -62,12 +67,22 @@ export const Cart = () => {
             const formattedSumPrice = SumPrice.toLocaleString();
 
             setSum_price(formattedSumPrice); // フォーマットした価格を設定
+            setOrderOK(false);
         };
 
+        handleUpdateCount();
 
     }, [])
 
+    //  カウント処理
+    const handleUpdateCount = () => {
+        const Count_n = JSON.parse(localStorage.getItem("cart")) || [];
+        const Count_t = JSON.parse(localStorage.getItem("temp_cart")) || [];
+        const SumCartCount = Count_n.length + Count_t.length;
+        setCartCount(SumCartCount);
+    }
 
+    //  注文削除
     const handleDeleteButton = (e) => {
         let delete_temp_cart = cart;
         console.log(e);
@@ -78,6 +93,10 @@ export const Cart = () => {
         const SumPrice = delete_temp_cart.length * 150;
         // カンマ区切りでフォーマット
         const formattedSumPrice = SumPrice.toLocaleString();
+        handleUpdateCount();
+        if(SumPrice === 0){
+            setOrderOK(true);
+        }
 
         setSum_price(formattedSumPrice); // フォーマットした価格を設定
     }
@@ -97,7 +116,7 @@ export const Cart = () => {
         const OrderData = JSON.parse(localStorage.getItem("cart"));
 
         console.log(OrderData);
-        if(OrderData.length === 0){
+        if (OrderData.length === 0) {
             return
         }
 
@@ -123,10 +142,10 @@ export const Cart = () => {
             console.log("サーバーからのレスポンス:", result);
 
             if (result['status'] == 'success') {
-                // nav("/confirmed", { state: { OK: 1 } });
+                nav("/done", { state: { OK: 1 } });
             }
             else {
-                // nav("/confirmed", { state: { OK: 0 } });
+                nav("/done", { state: { OK: 0 } });
             };
 
         } catch (error) {
@@ -142,7 +161,7 @@ export const Cart = () => {
 
     return (
         <>
-            <Header />
+            <Header cartCount={cartCount} />
             <div className="cart_container">
                 <div className="cart_content">
                     <h3 className="cart_title">
@@ -153,12 +172,12 @@ export const Cart = () => {
                             受け取り場所
                         </p>
                         <p className="cart_content_explain">
-                            東京電子専門学校4号館7階
+                            東京電子専門学校1・2号館7階
                         </p>
                     </div>
                     <div className="cart_content-head">
                         <p className="cart_content_title">
-                            お支払方法
+                            お支払方法（代引き）
                         </p>
                         <ul>
                             <li>
@@ -182,8 +201,9 @@ export const Cart = () => {
                                     if (matchingJuice) {
                                         return (
                                             <Cart_item
-                                                key={`${cartItem.id}-${index}`} // ユニークなkey
-                                                Image={matchingJuice.imageURL} // juiceDataから取得
+                                                key={`${cartItem.id}-${index}`} 
+                                                Image={matchingJuice.imageURL}
+                                                color={matchingJuice.color} 
                                                 title={cartItem.juice}
                                                 topping_01={cartItem.topping01}
                                                 topping_02={cartItem.topping02}
@@ -195,7 +215,9 @@ export const Cart = () => {
                                     return null; // 一致するものがない場合はnullを返す
                                 })
                             ) : (
-                                <li>商品が追加されていません。</li>
+                                <li className='cart_content_list-item-no'>
+                                    <p>商品が追加されていません。</p>
+                                </li>
                             )}
                         </ul>
                     </div>
@@ -215,7 +237,8 @@ export const Cart = () => {
                         type='button'
                         className='orderbutton'
                         onClick={handleOrder}
-                    >注文する
+                        disabled={orderOK}
+                    >{orderOK ? "商品がありません" : "注文する"}
                     </button>
                 </div>
             </div >

@@ -6,6 +6,8 @@ import { Start } from './pages/Start';
 import { Order } from './pages/Order';
 import { Cart } from './pages/Cart';
 import { Option } from './pages/Option';
+import { Monitor } from './pages/Monitor';
+import { Done } from './pages/Done';
 
 function App() {
 
@@ -30,6 +32,8 @@ function App() {
                     <Route path="/order" element={<Order />} />
                     <Route path="/cart" element={<Cart />} />
                     <Route path="/option" element={<Option />} />
+                    <Route path="/monitor" element={<Monitor />} />
+                    <Route path="/done" element={<Done />} />
                 </Routes>
             </BrowserRouter>
             {/* } */}
