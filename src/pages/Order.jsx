@@ -1,22 +1,26 @@
 import { React, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircleCheck } from '@fortawesome/free-regular-svg-icons';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { Header } from '../component/Header';
 import { Footer } from '../component/Footer';
 import { Catalog_card } from '../component/Catalog_card';
+import { Topping_card } from '../component/Topping_card';
 
 export const Order = () => {
 
     const [juiceData, setJuiceData] = useState([]);
     const [toppingData, setToppingData] = useState([]);
     const [nowStatus, setNowStatus] = useState('juice');
-;
+    const [toppingFlag, setToppingFlag] = useState([]);
+    const [orderData, setOrderData] = useState({});
+    const [preorderData, setPreorderData] = useState([]);
+    const [displayJuice, setDisplayJuice] = useState("");
+
 
     //  選択juice
     const [selectJuiceImage, setSelectJuiceImage] = useState("https://placehold.jp/350x450.png?text=aaa");
-    const [selectJuiceName, setSelectJuiceName] = useState("コーヒークラッシュ");
+    const [selectJuiceName, setSelectJuiceName] = useState("");
 
     const nav = useNavigate();
 
@@ -38,9 +42,9 @@ export const Order = () => {
                 setToppingData(data.topping);
                 //  idを取得
             } catch (error) {
-                
+
             } finally {
-                
+
             }
         }
 
@@ -49,13 +53,52 @@ export const Order = () => {
         // setCartCount(JSON.parse(localStorage.getItem("cart")).length);
     }, [])
 
-    const handleSelectJuice = () => {
-        setNowStatus("topping");
-    }
-
     const handleCloseTopping = () => {
         setNowStatus("juice");
     }
+
+    //  商品の追加
+    const handleSelectJuice = (id, title , image) => {
+        //  商品の追加
+        setOrderData({"id": id,"juice": title,})
+        setSelectJuiceName(title);
+        setSelectJuiceImage(image);
+        setNowStatus("topping")
+       
+        document.body.style.overflow = 'hidden';
+    };
+
+    // トッピングの追加
+    const addTopping = (id, title) => {
+        console.log(orderData);
+        console.log(id);
+        const temp_data = preorderData;
+        if (!temp_data.includes(title)) {
+            temp_data.push(title);
+
+            temp_data.forEach(e => {
+                toppingFlag[e] = true;
+            });
+
+
+            if (temp_data.length == 3) {
+                toppingFlag[temp_data[0]] = false;
+                temp_data.shift();
+            }
+            setPreorderData(temp_data);
+            console.log(temp_data);
+
+            const temp_Senddata = {
+                "Topping01": preorderData[1] || "なし",
+                "Topping02": preorderData[0],
+            };
+
+            setOrderData((prevOrderData) => ({
+                ...prevOrderData,
+                ...temp_Senddata,
+            }));
+        }
+    };
 
 
     return (
@@ -78,7 +121,7 @@ export const Order = () => {
                                     imageURL={item.imageURL}
                                     title={item.title}
                                     explain={item.explain}
-                                    onAdd={() => handleSelectJuice()}
+                                    onAdd={() => handleSelectJuice(item.id, item.title, item.imageURL)}
                                 />
                             );
                         })}
@@ -116,7 +159,7 @@ export const Order = () => {
                                 <p>チョコソース</p>
                             </li>
                             <li className="topping_list-item none">
-                                
+
                             </li>
                         </ul>
                         <p className="caption">
@@ -162,42 +205,18 @@ export const Order = () => {
                                 </p>
                             </div>
                             <ul className="topping_list">
-                                <li className="topping_list-item">
-                                    <p>チョコスプレー</p>
-                                    <FontAwesomeIcon icon={faCircleCheck} className='check_icon' />
-                                </li>
-                                <li className="topping_list-item">
-                                    <p>チョコスプレー</p>
-                                    <FontAwesomeIcon icon={faCircleCheck} className='check_icon' />
-                                </li>
-                                <li className="topping_list-item">
-                                    <p>チョコスプレー</p>
-                                    <FontAwesomeIcon icon={faCircleCheck} className='check_icon' />
-                                </li>
-                                <li className="topping_list-item">
-                                    <p>チョコスプレー</p>
-                                    <FontAwesomeIcon icon={faCircleCheck} className='check_icon' />
-                                </li>
-                                <li className="topping_list-item">
-                                    <p>チョコスプレー</p>
-                                    <FontAwesomeIcon icon={faCircleCheck} className='check_icon' />
-                                </li>
-                                <li className="topping_list-item">
-                                    <p>チョコスプレー</p>
-                                    <FontAwesomeIcon icon={faCircleCheck} className='check_icon' />
-                                </li>
-                                <li className="topping_list-item">
-                                    <p>チョコスプレー</p>
-                                    <FontAwesomeIcon icon={faCircleCheck} className='check_icon' />
-                                </li>
-                                <li className="topping_list-item">
-                                    <p>チョコスプレー</p>
-                                    <FontAwesomeIcon icon={faCircleCheck} className='check_icon' />
-                                </li>
-                                <li className="topping_list-item">
-                                    <p>チョコスプレー</p>
-                                    <FontAwesomeIcon icon={faCircleCheck} className='check_icon' />
-                                </li>
+                                {toppingData.map((item, index) => {
+                                    return (
+                                        <Topping_card
+                                            key={index}
+                                            id={item.id}
+                                            imageURL={item.imageURL}
+                                            title={item.title}
+                                            onAdd={() => addTopping(item.id, item.title)}
+                                            flag={toppingFlag[item.title]}
+                                        />
+                                    );
+                                })}
                             </ul>
                             <button
                                 type="button"

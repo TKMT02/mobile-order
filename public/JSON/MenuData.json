@@ -2,7 +2,7 @@
     "juice": [
         {
             "id": "juice1",
-            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "imageURL": "https://placehold.jp/250x250.png?text=????",
             "title": "チェリーシュワシュワ",
             "price": "150",
             "explain": "赤をイメージとしたドリンクです。炭酸の味を堪能できます。"
@@ -105,7 +105,7 @@
         {
             "id": "topping6",
             "imageURL": "https://placehold.jp/320x180.png?text=IMAGE",
-            "title": "カットフルーツ(各種)",
+            "title": "カットフルーツ",
             "explain": "おいしいカットフルーツのトッピングです。"
         },
         {

@@ -4,7 +4,7 @@ export const Catalog_card = (props) => {
     return (
         <>
             <li className="catalog_list-item">
-                <img src="https://placehold.jp/360x440.png?test" alt="商品名" className='item-image'/>
+                <img src={props.imageURL} alt="商品名" className='item-image'/>
                 <h2 className="item-name">
                     {props.title}
                 </h2>
