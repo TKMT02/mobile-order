@@ -15,18 +15,11 @@ export const Done = () => {
         } else if (OK === 1) {
             setMsg("注文を承りました。");
         }
-
-        // 3秒後にメニュー画面に遷移
-        const timer = setTimeout(() => {
-            nav('/order');
-        }, 3000);
-
-        // クリーンアップ: タイマーを解除
-        return () => clearTimeout(timer);
+        return
     }, [OK, nav]); // OKが変更された場合のみ実行 
 
     const handleReturn = () =>{
-        nav('/order');
+        nav('/option');
     }
 
     return (
@@ -35,10 +28,11 @@ export const Done = () => {
 
             <div className="done_container">
                 <h1>{msg}</h1>
+                <p>受け取りの際は左上のメニューからオプション画面を開き、モニターに表示される番号が一致しましたら受付までお越しください。</p>
                 <p className="error">
-                    ※3秒後にメニューページに戻ります。
+                    ※受け取り後の注文内容が確認できないことがございます。
                 </p>
-                <p>動作しない場合は<br /><a onClick={handleReturn}>こちら</a>をクリックしてください。</p>
+                <p>メニューページに戻るには<br /><a onClick={handleReturn}>こちら</a>をクリックしてください。</p>
             </div>
 
         </>

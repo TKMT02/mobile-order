@@ -3,7 +3,7 @@ import React from 'react'
 export const Cart_item = (props) => {
     return (
         <li className='cart_content_list-item'>
-            <img src={props.Image} alt="" className='cart_content-list-item-image' />
+            <img src={props.Image} alt="" className='cart_content-list-item-image' width={150} height={150} loading='lazy' />
             <div className="cart_content-list-item_body">
                 <h3 className={`cart_content-title ${props.color}`}>
                     {props.title}

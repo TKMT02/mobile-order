@@ -1,4 +1,4 @@
-import  { React, useState, useEffect } from 'react';
+import { React, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Header } from '../component/Header';
 import { Cart_item } from '../component/Cart_item';
@@ -33,8 +33,6 @@ export const Cart = () => {
                 setJuiceData(data.juice);
             } catch (error) {
 
-            } finally {
-
             }
         }
 
@@ -53,8 +51,9 @@ export const Cart = () => {
         }
 
         // cart が存在する場合、データをセット
-        if (nowCartData.length) {
+        if (JSON.parse(localStorage.getItem("cart")).length) {
             // cartID を追加
+            const nowCartData = JSON.parse(localStorage.getItem("cart"));
             const updatedCartData = nowCartData.map((item, index) => ({
                 ...item,
                 cartID: index + 1,
@@ -94,7 +93,7 @@ export const Cart = () => {
         // カンマ区切りでフォーマット
         const formattedSumPrice = SumPrice.toLocaleString();
         handleUpdateCount();
-        if(SumPrice === 0){
+        if (SumPrice === 0) {
             setOrderOK(true);
         }
 
@@ -114,12 +113,21 @@ export const Cart = () => {
 
         //  sendOrderDataに追加
         const OrderData = JSON.parse(localStorage.getItem("cart"));
+        const OrderData_X = JSON.parse(localStorage.getItem("cart"));
 
         console.log(OrderData);
         if (OrderData.length === 0) {
             return
         }
-
+        //  カートの中身をHistoryに入れる
+        const now = new Date();
+        const nowTime = `${now.getMonth() + 1}月${now.getDate()}日 ${now.getHours()}時${now.getMinutes()}分`;
+        for (let i = 0; i < OrderData_X.length; i++) {
+            OrderData_X[i].timestamp = nowTime;
+        }
+        console.log(OrderData_X);
+        //  カートの中身をHistoryに入れる
+        localStorage.setItem("history_cart", JSON.stringify(OrderData_X));
         const sendOrderData = { ...userData, ...OrderData };
         console.log(sendOrderData);
 
@@ -152,6 +160,8 @@ export const Cart = () => {
             console.log("API通信エラー", error);
             return
         } finally {
+            //  カートの中をリセット
+            localStorage.setItem("cart", JSON.stringify(new Array()));
             return
         }
 
@@ -201,9 +211,9 @@ export const Cart = () => {
                                     if (matchingJuice) {
                                         return (
                                             <Cart_item
-                                                key={`${cartItem.id}-${index}`} 
+                                                key={`${cartItem.id}-${index}`}
                                                 Image={matchingJuice.imageURL}
-                                                color={matchingJuice.color} 
+                                                color={matchingJuice.color}
                                                 title={cartItem.juice}
                                                 topping_01={cartItem.topping01}
                                                 topping_02={cartItem.topping02}

@@ -8,7 +8,7 @@ import { Catalog_card } from '../component/Catalog_card';
 import { Topping_card } from '../component/Topping_card';
 import { Notice } from '../component/Notice';
 
-export const Order = () => {
+export const Store = () => {
     //  メニューデータ処理
     const [juiceData, setJuiceData] = useState([]);
     const [toppingData, setToppingData] = useState([]);
@@ -19,7 +19,6 @@ export const Order = () => {
     //  注文データ処理
     const [preorderData, setPreorderData] = useState([]);
     const [cart_content, setCart_content] = useState([]);
-    const [cartCount, setCartCount] = useState(0);
 
     //  通知処理
     const [noticeMsg, setNoticeMsg] = useState('');
@@ -62,7 +61,6 @@ export const Order = () => {
         }
 
         fetchData();
-        handleUpdateCount();
     }, [])
 
     //  注文キャンセル
@@ -148,21 +146,15 @@ export const Order = () => {
         setCart_content(temp_cartData);
         //  ローカルストレージに追加
         localStorage.setItem("temp_cart", JSON.stringify(temp_cartData));
+        //  オーダー強制
+        handleOrder();
         //  リセットと通知
-        handleUpdateCount();
         handleCloseTopping();
-        handleNotice("カートに追加しました。");
+        handleNotice("店頭注文しました。");
         console.log(cart_content);
     }
 
-    //  カウント処理
-    const handleUpdateCount = () => {
-        const Count_n = JSON.parse(localStorage.getItem("cart"));
-        const Count_t = JSON.parse(localStorage.getItem("temp_cart")) || [];
-        const SumCartCount = Count_n.length + Count_t.length;
-        console.log(SumCartCount);
-        setCartCount(SumCartCount);
-    }
+
 
     //  通知処理
     const handleNotice = (e) => {
@@ -174,6 +166,59 @@ export const Order = () => {
     };
 
 
+    //  注文処理
+    const handleOrder = async () => {
+
+        const UserName = "店頭注文";
+        const UserID = "HOME";
+        const userData =
+        {
+            "userID": UserID,
+            "userName": UserName,
+            "location": "店頭販売"
+        };
+
+        //  sendOrderDataに追加
+        const OrderData = JSON.parse(localStorage.getItem("temp_cart"));
+
+        const sendOrderData = { ...userData, ...OrderData };
+        console.log(sendOrderData);
+
+        //  データ保存（ＤＢ）
+        try {
+            const response = await fetch(`${process.env.PUBLIC_URL}/php/process-save.php`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json",
+                },
+                body: JSON.stringify(sendOrderData)
+            });
+            if (!response.ok) {
+                // レスポンスステータスコードが200台でない場合
+                throw new Error(`HTTPエラー ${response.status}`);
+            };
+
+            const result = await response.json();
+
+            console.log("サーバーからのレスポンス:", result);
+
+            if (result['status'] == 'success') {
+                console.log("成功しました。");
+            }
+            else {
+                console.log("失敗しました。");
+            };
+
+        } catch (error) {
+            console.log("API通信エラー", error);
+            return
+        } finally {
+            //  カートの中をリセット
+            localStorage.setItem("cart", JSON.stringify(new Array()));
+            return
+        }
+    }
+
     return (
         <>
             <div className="container">
@@ -184,7 +229,7 @@ export const Order = () => {
                     />
                 )}
                 <div className="fixed_content">
-                    <Header cartCount={cartCount} />
+                    <Header cartCount={0} />
                     <div className="sub-header">
                         <p className='product_list-text'>商品一覧</p>
                         <p>全品一律150円</p>
@@ -303,7 +348,7 @@ export const Order = () => {
                                 className='addCart'
                                 onClick={() => handleAddCart()}
                             >
-                                注文カゴに入れる
+                                店頭注文する
                             </button>
                         </div>
                     </div>

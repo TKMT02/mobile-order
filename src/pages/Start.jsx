@@ -31,7 +31,7 @@ export const Start = () => {
 
             async function generateID() {
                 try {
-                    const res = await fetch(`${process.env.PUBLIC_URL}/api/generateUniqueID.php`, {
+                    const res = await fetch(`${process.env.PUBLIC_URL}/php/generateUniqueID.php`, {
                         'method': 'GET',
                         'headers': {
                             'Content-Type': 'application/json',
@@ -51,6 +51,8 @@ export const Start = () => {
             }
         }
 
+        localStorage.setItem("cart", JSON.stringify(new Array()));
+        localStorage.setItem("history_cart", JSON.stringify(new Array()));
         fetchData();
 
     }, []);
@@ -97,15 +99,17 @@ export const Start = () => {
         if (PassInput === password) {
             localStorage.setItem("login_ok", true);
             navigate('./order');
-        } else if (PassInput === "admin") {
+        } else if (PassInput === "admin0120") {
             navigate('./res');
+        } else if (PassInput === "store0120") {
+            navigate('./store');
         } else if (PassInput === "reset00") {
             localStorage.clear("userName");
             localStorage.clear("userID");
             setNoticeMsg("管理者実行：リセット");
             // handleIDgenerate();
             handleNotice();
-        } else if (PassInput === "monitor-00") {
+        } else if (PassInput === "monitor0120") {
             navigate("./monitor");
         } else {
             setPassInput("");

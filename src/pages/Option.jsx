@@ -19,6 +19,7 @@ export const Option = () => {
 
         setUserID(localStorage.getItem("userID"));
         setUserName(localStorage.getItem("userName"));
+        setHistory_cart(JSON.parse(localStorage.getItem("history_cart")));
         handleUpdateCount();
 
         return
@@ -92,20 +93,22 @@ export const Option = () => {
                         <p className='text'>現金</p>
                     </li>
                 </ul>
-
                 <button type="button" className="showMyCard" onClick={() => handleModalMyCard(true)}>
                     受取カードを表示
                 </button>
                 <h2 className="title">
-                    これまでの注文一覧
+                    前回の注文（注文待ち）
                 </h2>
+                <p className="note">
+                    ※前回までの注文のみ表示されます。
+                </p>
                 <ul className="history_list">
                     {
                         history_cart.map((item, index) => {
                             if (history_cart.length > 0) {                                
                                 return (
                                     <History_card
-                                        id={index}
+                                        key={index}
                                         juice={item.juice}
                                         topping_01={item.topping01}
                                         topping_02={item.topping02}

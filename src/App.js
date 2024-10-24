@@ -8,6 +8,8 @@ import { Cart } from './pages/Cart';
 import { Option } from './pages/Option';
 import { Monitor } from './pages/Monitor';
 import { Done } from './pages/Done';
+import { Store } from './pages/Store';
+import { Receive } from './pages/Receive';
 
 function App() {
 
@@ -34,6 +36,8 @@ function App() {
                     <Route path="/option" element={<Option />} />
                     <Route path="/monitor" element={<Monitor />} />
                     <Route path="/done" element={<Done />} />
+                    <Route path="/store" element={<Store />} />
+                    <Route path="/res" element={<Receive />} />
                 </Routes>
             </BrowserRouter>
             {/* } */}

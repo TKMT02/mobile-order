@@ -17,39 +17,39 @@ html {
 
 /* juice色 */
 
-.red{
+.red {
     color: #ff0000
 }
 
-.blue{
+.blue {
     color: blue;
 }
 
-.purple{
+.purple {
     color: purple;
 }
 
-.orange{
+.orange {
     color: orange;
 }
 
-.brown{
+.brown {
     color: brown;
 }
 
-.green{
+.green {
     color: greenyellow;
 }
 
-.white{
+.white {
     color: grey;
 }
 
-.pink{
+.pink {
     color: palevioletred;
 }
 
-.yellow{
+.yellow {
     color: yellowgreen;
 }
 
@@ -607,15 +607,18 @@ html {
         }
 
         .orderbutton:disabled {
-            background: #ccc; /* 無効時の背景色 */
-            color: #666; /* 無効時の文字色 */
-            cursor: not-allowed; /* 無効時のカーソルスタイル */
+            background: #ccc;
+            /* 無効時の背景色 */
+            color: #666;
+            /* 無効時の文字色 */
+            cursor: not-allowed;
+            /* 無効時のカーソルスタイル */
         }
     }
 }
 
 /* カートカード */
-.cart_content_list{
+.cart_content_list {
     list-style: none;
 }
 
@@ -682,8 +685,8 @@ html {
     }
 }
 
-.cart_content_list-item-no{
-    p{
+.cart_content_list-item-no {
+    p {
         font-size: 1.6rem;
         text-align: center;
         padding: 15px 0;
@@ -787,12 +790,25 @@ html {
     color: #ff0000;
 }
 
-.done_container p{
+.done_container p {
     margin: 30px auto;
     font-size: 1.8rem;
     text-align: center;
+
     a {
         text-decoration: underline;
     }
 }
-    
+
+
+/* ヒストリー */
+
+.history_list-item {
+    display: block;
+    padding: 10px;
+    border-bottom: 1px solid #000;
+    p {
+        width: 100%;
+        font-size: 1.5rem;
+    }
+}

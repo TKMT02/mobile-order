@@ -1,0 +1,55 @@
+.monitor-title {
+    font-size: 2.4rem;
+    text-align: center;
+    margin: 10px auto;
+}
+
+.monitor-card {
+    width: 225px;
+    height: 225px;
+    background: #fff;
+    box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin: 10px;
+    border: 1px solid #000;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+
+    h2 {
+        font-size: 2.4rem;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+
+        .monitor-card_id {
+            display: block;
+            font-size: 6.4rem;
+        }
+    }
+
+    .monitor-bar {
+        position: absolute;
+        right: 10px;
+        bottom: 10px;
+    }
+}
+
+.glow {
+    background-color: #4caf50;
+    /* 完了時の背景色 */
+    animation: glow-animation 1.5s infinite alternate;
+}
+
+@keyframes glow-animation {
+    from {
+        box-shadow: 0 0 10px #4caf50;
+    }
+
+    to {
+        box-shadow: 0 0 20px #4caf50, 0 0 30px #4caf50;
+    }
+}
