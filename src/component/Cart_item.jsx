@@ -19,7 +19,9 @@ export const Cart_item = (props) => {
                 </ul>
                 <button
                     type="button"
-                    className='deletebutton'>削除</button>
+                    className='deletebutton'
+                    onClick={props.deleteButton}
+                >削除</button>
             </div>
         </li>
     )

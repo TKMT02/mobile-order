@@ -53,16 +53,41 @@ export const Cart = () => {
         }
 
         if (localStorage.getItem("cart")) {
-            setCart(JSON.parse(localStorage.getItem("cart")));
+
+            const temp_cart = JSON.parse(localStorage.getItem("cart"));
+            for (let i = 1; i < temp_cart.length; i++) {
+                temp_cart[i - 1].cartID = i;
+            }
+            setCart(temp_cart);
+            //  合計金額
+            const CartData = JSON.parse(localStorage.getItem("cart"))
+            const SumPrice = CartData.length * 150;
+            // カンマ区切りでフォーマット
+            const formattedSumPrice = SumPrice.toLocaleString();
+
+            setSum_price(formattedSumPrice); // フォーマットした価格を設定
         }
 
 
         //  現在のカート状態を保存
 
-        //  合計金額
-        // const SumPrice = CartData.length * 150;
-        // setSum_price(SumPrice);
+
     }, [])
+
+
+    const handleDeleteButton = (e) => {
+        let delete_temp_cart = cart;
+        console.log(e);
+        delete_temp_cart = delete_temp_cart.filter(x => x.cartID !== e);
+        setCart(delete_temp_cart);
+        localStorage.setItem("cart", JSON.stringify(delete_temp_cart));
+        console.log(delete_temp_cart);
+        const SumPrice = delete_temp_cart.length * 150;
+        // カンマ区切りでフォーマット
+        const formattedSumPrice = SumPrice.toLocaleString();
+
+        setSum_price(formattedSumPrice); // フォーマットした価格を設定
+    }
 
 
     return (
@@ -112,6 +137,7 @@ export const Cart = () => {
                                                 title={cartItem.juice}
                                                 topping_01={cartItem.topping01}
                                                 topping_02={cartItem.topping02}
+                                                deleteButton={() => handleDeleteButton(cartItem.cartID)}
                                             />
                                         );
                                     }
