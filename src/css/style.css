@@ -126,6 +126,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     h1 {
         max-width: 320px;
         width: 100%;
@@ -141,7 +142,7 @@ html {
         }
     }
 
-    .icon{
+    .icon {
         font-size: 2.8rem;
         cursor: pointer;
     }
@@ -298,13 +299,14 @@ html {
             font-size: clamp(1.6rem, 3vw, 2.4rem);
             padding: 3px 0;
         }
-        .none{
+
+        .none {
             opacity: 0;
         }
     }
 
     .caption {
-        width:93%;
+        width: 93%;
         margin: 0 auto;
         font-size: clamp(1.25rem, 3vw, 1.6rem);
         margin-top: 20px;
@@ -331,6 +333,7 @@ html {
         .topping_content-head {
             position: relative;
             padding: 10px 0;
+
             .topping_content-title {
                 font-size: 1.8rem;
                 font-weight: bold;
@@ -399,6 +402,7 @@ html {
                 flex-wrap: wrap;
                 margin: 15px auto;
                 background-color: var(--color-main);
+
                 .topping_list-item {
                     max-width: 300px;
                     width: 48%;
@@ -410,15 +414,18 @@ html {
                     margin: 5px 3px;
                     border: 1px solid #000;
                     cursor: pointer;
-                    p{
+
+                    p {
                         width: 130px;
                     }
+
                     .check_icon {
                         font-size: 0.9lh;
                         margin-left: 5px;
                     }
                 }
-                .topping_list-item.checked{
+
+                .topping_list-item.checked {
                     color: #fff;
                     font-weight: bold;
                     background: #B996FF;
@@ -479,15 +486,20 @@ html {
                 font-weight: bold;
             }
 
+            ul {
+                padding-bottom: 10px;
+                li {
+                    list-style: none;
+                    p {
+                        font-size: 1.4rem;
+                        padding: 5px 0 5px 35px;
+                    }
+                }
+            }
+
             .cart_content_explain {
                 font-size: 1.4rem;
                 padding: 20px 0 20px 40px;
-
-                ul {
-                    li {
-                        list-style: none;
-                    }
-                }
             }
         }
 
@@ -551,20 +563,21 @@ html {
 
     .cart_content-list-item-image {
         width: 30%;
-        border-radius: 6px 0 0 6px;
         height: auto;
+        border-radius: 6px 0 0 6px;
         display: block;
     }
 
     .cart_content-list-item_body {
-        width: 65%;
+        width: 70%;
         display: flex;
         flex-direction: column;
         justify-content: start;
         align-items: start;
+        margin-left: 10px;
 
         .cart_content-title {
-            font-size: 1.8rem;
+            font-size: 1.6rem;
         }
 
         .cart_topping_list {
@@ -585,8 +598,8 @@ html {
         .deletebutton {
             display: block;
             width: 30%;
-            margin: 20px 20px 0 auto;
-            padding: 8px 0;
+            margin: 15px 15px 0 auto;
+            padding: 3px 0;
             font-size: 1.2rem;
             font-weight: bold;
             font-family: 'Inter';
@@ -599,7 +612,7 @@ html {
 }
 
 /* 情報画面 */
-.options_container{
+.options_container {
     width: 80%;
     margin: 75px auto;
     height: auto;
@@ -608,32 +621,35 @@ html {
     align-items: start;
     justify-content: center;
 
-    .userid,.username{
+    .userid,
+    .username {
         font-size: 1.8rem;
     }
 
-    .note{
+    .note {
         margin: 15px 0;
         margin-left: 15px;
         font-size: 1.4rem;
     }
 
-    .title{
+    .title {
         font-size: 1.8rem;
     }
 
     ul {
         margin: 15px 0 15px 15px;
+
         li {
             list-style: none;
-            .text{
+
+            .text {
                 font-size: 1.6rem;
                 padding: 2px 0 0;
             }
         }
     }
 
-    button.showMyCard{
+    button.showMyCard {
         display: block;
         margin: 30px auto;
         border: none;
@@ -650,7 +666,8 @@ html {
         background-color: var(--color-sub);
         cursor: pointer;
     }
-    button.nameChangeBtn{
+
+    button.nameChangeBtn {
         display: block;
         width: 240px;
         border: none;
@@ -670,7 +687,7 @@ html {
 
 /* 確認画面 */
 
-.comfirmed_container{
+.comfirmed_container {
     width: 100%;
     height: 90vh;
     padding-top: 10vh;
@@ -680,14 +697,14 @@ html {
     justify-content: center;
 }
 
-.comfirmed_container h1{
+.comfirmed_container h1 {
     font-size: 36px;
 }
 
-.comfirmed_container .error{
+.comfirmed_container .error {
     color: #ff0000;
 }
 
-.comfirmed_container p a{
+.comfirmed_container p a {
     text-decoration: underline;
 }
