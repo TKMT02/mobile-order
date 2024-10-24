@@ -19,7 +19,7 @@ export const Topping_card = (props) => {
 
     return (
         <>
-            <li className="topping_list-item" id={props.id} onClick={props.onAdd}>
+            <li className={props.flag ? "topping_list-item checked" : "topping_list-item"} id={props.id} onClick={props.onAdd}>
                 <p>{props.title}</p>
                 <FontAwesomeIcon icon={faCircleCheck} className='check_icon' />
             </li >

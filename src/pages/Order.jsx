@@ -72,7 +72,7 @@ export const Order = () => {
     const addTopping = (id, title) => {
         console.log(orderData);
         console.log(id);
-        const temp_data = preorderData;
+        let temp_data = preorderData;
         if (!temp_data.includes(title)) {
             temp_data.push(title);
 
@@ -85,6 +85,25 @@ export const Order = () => {
                 toppingFlag[temp_data[0]] = false;
                 temp_data.shift();
             }
+            setPreorderData(temp_data);
+            console.log(temp_data);
+
+            const temp_Senddata = {
+                "Topping01": preorderData[1] || "なし",
+                "Topping02": preorderData[0],
+            };
+
+            setOrderData((prevOrderData) => ({
+                ...prevOrderData,
+                ...temp_Senddata,
+            }));
+        
+        } else{
+            //  含む場合
+
+            temp_data = temp_data.filter(e => e !== title);
+            toppingFlag[title] = false;
+
             setPreorderData(temp_data);
             console.log(temp_data);
 
