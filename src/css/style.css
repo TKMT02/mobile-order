@@ -514,9 +514,8 @@ html {
 .cart_container {
     width: 100%;
     height: auto;
-    padding: 100px 0 300px;
+    padding: 30px 0 300px;
     background: var(--color-main);
-    padding: 30px 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -606,7 +605,7 @@ html {
             border: none;
             border-radius: 24px;
         }
-        
+
         .orderbutton:disabled {
             background: #ccc; /* 無効時の背景色 */
             color: #666; /* 無効時の文字色 */
