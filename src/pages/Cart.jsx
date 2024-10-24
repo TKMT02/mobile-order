@@ -36,40 +36,33 @@ export const Cart = () => {
 
         fetchData();
 
-        if (localStorage.getItem("temp_cart")) {
+        // 一度だけ localStorage からデータを取得し、必要に応じて処理を行う
+        const tempCartData = localStorage.getItem("temp_cart") ? JSON.parse(localStorage.getItem("temp_cart")) : [];
+        const nowCartData = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")) : [];
 
-            if (localStorage.getItem("cart")) {
-                const nowCartData = JSON.parse(localStorage.getItem("cart"));
-                const tempCartData = JSON.parse(localStorage.getItem("temp_cart"));
-                const CartData = [...nowCartData, ...tempCartData];
-                localStorage.setItem("cart", JSON.stringify(CartData));
-                localStorage.removeItem("temp_cart");
-            } else {
-                const tempCartData = JSON.parse(localStorage.getItem("temp_cart"));
-                localStorage.setItem("cart", JSON.stringify(tempCartData));
-                console.log(tempCartData);
-                localStorage.removeItem("temp_cart");
-            }
+        // temp_cart が存在する場合、cart に追加
+        if (tempCartData.length) {
+            const CartData = [...nowCartData, ...tempCartData];
+            localStorage.setItem("cart", JSON.stringify(CartData));
+            localStorage.removeItem("temp_cart");
         }
 
-        if (localStorage.getItem("cart")) {
+        // cart が存在する場合、データをセット
+        if (nowCartData.length) {
+            // cartID を追加
+            const updatedCartData = nowCartData.map((item, index) => ({
+                ...item,
+                cartID: index + 1,
+            }));
 
-            const temp_cart = JSON.parse(localStorage.getItem("cart"));
-            for (let i = 1; i < temp_cart.length; i++) {
-                temp_cart[i - 1].cartID = i;
-            }
-            setCart(temp_cart);
-            //  合計金額
-            const CartData = JSON.parse(localStorage.getItem("cart"))
-            const SumPrice = CartData.length * 150;
-            // カンマ区切りでフォーマット
+            setCart(updatedCartData);
+
+            // 合計金額の計算
+            const SumPrice = updatedCartData.length * 150;
             const formattedSumPrice = SumPrice.toLocaleString();
 
             setSum_price(formattedSumPrice); // フォーマットした価格を設定
-        }
-
-
-        //  現在のカート状態を保存
+        };
 
 
     }, [])
@@ -87,6 +80,63 @@ export const Cart = () => {
         const formattedSumPrice = SumPrice.toLocaleString();
 
         setSum_price(formattedSumPrice); // フォーマットした価格を設定
+    }
+
+    const handleOrder = async () => {
+
+        const UserName = localStorage.getItem("userName") || "匿名";
+        const UserID = localStorage.getItem("userID") || "";
+        const userData =
+        {
+            "userID": UserID,
+            "userName": UserName,
+            "location": "教務室"
+        };
+
+        //  sendOrderDataに追加
+        const OrderData = JSON.parse(localStorage.getItem("cart"));
+
+        console.log(OrderData);
+        if(OrderData.length === 0){
+            return
+        }
+
+        const sendOrderData = { ...userData, ...OrderData };
+        console.log(sendOrderData);
+
+        //  データ保存（ＤＢ）
+        try {
+            const response = await fetch(`${process.env.PUBLIC_URL}/php/process-save.php`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json",
+                },
+                body: JSON.stringify(sendOrderData)
+            });
+            if (!response.ok) {
+                // レスポンスステータスコードが200台でない場合
+                throw new Error(`HTTPエラー ${response.status}`);
+            };
+
+            const result = await response.json();
+
+            console.log("サーバーからのレスポンス:", result);
+
+            if (result['status'] == 'success') {
+                // nav("/confirmed", { state: { OK: 1 } });
+            }
+            else {
+                // nav("/confirmed", { state: { OK: 0 } });
+            };
+
+        } catch (error) {
+            console.log("API通信エラー", error);
+            return
+        } finally {
+            return
+        }
+
+
     }
 
 
@@ -164,7 +214,9 @@ export const Cart = () => {
                     <button
                         type='button'
                         className='orderbutton'
-                    >注文する</button>
+                        onClick={handleOrder}
+                    >注文する
+                    </button>
                 </div>
             </div >
         </>

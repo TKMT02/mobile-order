@@ -456,7 +456,8 @@ html {
 
 .cart_container {
     width: 100%;
-    height: auto;
+    height: 95vh;
+    padding: 100px 0 300px;
     background: var(--color-main);
     padding: 30px 0;
     display: flex;
