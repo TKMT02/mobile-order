@@ -279,8 +279,8 @@ html {
 /* カタログアイテムのスタイル */
 
 .catalog_list-item {
-    max-width: 350px;
-    width: 46%;
+    max-width: 280px;
+    width: 43%;
     background: #fff;
     border-radius: 24px;
     margin: 8px;
@@ -306,14 +306,14 @@ html {
 
     .item-explain {
         font-size: clamp(1.15rem, 3vw, 1.6rem);
-        min-height: 80px;
+        min-height: 120px;
         height: 100%;
-        padding: 5px 15px;
+        padding: 8px 15px;
     }
 
     .item-button {
         width: 80%;
-        padding: 10px 0;
+        padding: 5px 0;
         border: 1.5px solid #000;
         border-radius: 12px;
         margin-bottom: 20px;
@@ -343,7 +343,7 @@ html {
 
     .topping_list {
         width: 100%;
-        margin: 0 auto;
+        margin: 20px auto;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
@@ -354,7 +354,7 @@ html {
             width: 40%;
             margin: 0 auto;
             font-size: clamp(1.6rem, 3vw, 2.4rem);
-            padding: 3px 0;
+            padding: 8px 0;
         }
 
         .none {
@@ -462,11 +462,11 @@ html {
 
                 .topping_list-item {
                     max-width: 300px;
-                    width: 48%;
+                    width: 45%;
                     display: flex;
                     align-items: center;
                     justify-content: center;
-                    font-size: clamp(1.6rem, 3vw, 2rem);
+                    font-size: clamp(1.4rem, 3vw, 1.8rem);
                     padding: 10px 5px;
                     margin: 5px 3px;
                     border: 1px solid #000;
