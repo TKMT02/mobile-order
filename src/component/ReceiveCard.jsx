@@ -40,7 +40,7 @@ const styles = {
         border: '1px solid #ccc',
         borderRadius: '8px',
         padding: '15px',
-        width: '35px',
+        width: '350px',
         boxShadow: '2px 2px 12px rgba(0,0,0,0.1)',
     },
     P_card: {

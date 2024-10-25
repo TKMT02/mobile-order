@@ -791,6 +791,12 @@ html {
     color: #ff0000;
 }
 
+.red{
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ff0000;
+}
+
 .done_container p {
     margin: 30px auto;
     font-size: 1.8rem;
