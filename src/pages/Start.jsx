@@ -8,7 +8,6 @@ export const Start = () => {
     //  ナビゲーションシステム
     const navigate = useNavigate();
     const [firstLogin, setFirstLogin] = useState(false);
-    const [PassInput, setPassInput] = useState("");
     const [NameInput, setNameInput] = useState("");
     const [NoticeMsg, setNoticeMsg] = useState('');
     const [showNotice, setShowNotice] = useState(false);
@@ -51,8 +50,8 @@ export const Start = () => {
             }
         }
 
-        localStorage.setItem("cart", JSON.stringify(new Array()));
-        localStorage.setItem("history_cart", JSON.stringify(new Array()));
+        localStorage.setItem("cart", JSON.stringify([]));
+        localStorage.setItem("history_cart", JSON.stringify([]));
         fetchData();
 
     }, []);
@@ -76,14 +75,6 @@ export const Start = () => {
         }
     }
 
-    //  インプット
-    const password = "denpasai";
-
-    const handlePassInput = (e) => {
-        e.preventDefault();
-        setPassInput(e.target.value);
-    }
-
     const handleNameInput = (e) => {
         e.preventDefault();
         setNameInput(e.target.value);
@@ -91,31 +82,33 @@ export const Start = () => {
 
     const handleLogin = (e) => {
         e.preventDefault(); // フォームのデフォルト動作を防止
-        if(NameInput){
-            localStorage.setItem("userName", NameInput);
-        } else {
-            localStorage.setItem("userName", "匿名");
-        }
-        if (PassInput === password) {
-            localStorage.setItem("login_ok", true);
-            navigate('./order');
-        } else if (PassInput === "admin0120") {
+        if(NameInput === "admin0120"){
             navigate('./res');
-        } else if (PassInput === "store0120") {
+            return
+        }
+        else if(NameInput === "store0120"){
             navigate('./store');
-        } else if (PassInput === "reset00") {
+            return
+        }
+        else if(NameInput === "reset00"){
             localStorage.clear("userName");
             localStorage.clear("userID");
             setNoticeMsg("管理者実行：リセット");
             // handleIDgenerate();
             handleNotice();
-        } else if (PassInput === "monitor0120") {
-            navigate("./monitor");
-        } else {
-            setPassInput("");
-            setNoticeMsg("合言葉が間違っています！！");
-            handleNotice();
+            return
         }
+        else if(NameInput === "monitor"){
+            navigate('./monitor');
+            return
+        }
+        else if(NameInput){
+            localStorage.setItem("userName", NameInput);
+        } 
+        else {
+            localStorage.setItem("userName", "匿名");
+        }
+        navigate('./order');
     };
 
     //  通知処理
@@ -142,21 +135,6 @@ export const Start = () => {
                         <h1>
                             <img src={Logo} alt="カスタム推しドリンク" className='logo-image' />
                         </h1>
-                        <div className="modal_content">
-                            <p className="modal-text">
-                                合言葉を入力してね！
-                            </p>
-                            <input
-                                type="text"
-                                name="password"
-                                id="password"
-                                className='start_input'
-                                autoComplete='off'
-                                placeholder='QRコードの下にあるよ！'
-                                onChange={handlePassInput}
-                                value={PassInput}
-                            />
-                        </div>
                         <div className="modal_content">
                             <p className="modal-text">
                                 ユーザー名を入力！

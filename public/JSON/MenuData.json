@@ -2,7 +2,7 @@
     "juice": [
         {
             "id": "juice1",
-            "imageURL": "https://placehold.jp/250x250.png?text=????",
+            "imageURL": "/img/red.webp",
             "title": "チェリーシュワシュワ",
             "color": "red",
             "price": "150",
@@ -18,7 +18,7 @@
         },
         {
             "id": "juice3",
-            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "imageURL": "/img/yellow.webp",
             "title": "レモンポップ",
             "color": "yellow",
             "price": "150",
@@ -26,7 +26,7 @@
         },
         {
             "id": "juice4",
-            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "imageURL": "/img/purple.webp",
             "title": "グレープジューシー",
             "color": "purple",
             "price": "150",
@@ -34,7 +34,7 @@
         },
         {
             "id": "juice5",
-            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "imageURL": "/img/ichigo.webp",
             "title": "いちごミルクリボン",
             "color": "pink",
             "price": "150",
@@ -42,7 +42,7 @@
         },
         {
             "id": "juice6",
-            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "imageURL": "/img/orange.webp",
             "title": "オレンジスマイル",
             "color": "orange",
             "price": "150",
@@ -50,7 +50,7 @@
         },
         {
             "id": "juice7",
-            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "imageURL": "/img/meron.webp",
             "title": "メロンピチピチ",
             "color": "green",
             "price": "150",
@@ -58,7 +58,7 @@
         },
         {
             "id": "juice8",
-            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "imageURL": "/img/white.webp",
             "title": "カルピスふわふわ",
             "color": "white",
             "price": "150",
@@ -66,7 +66,7 @@
         },
         {
             "id": "juice9",
-            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "imageURL": "/img/coffee.webp",
             "title": "コーヒークラッシュ",
             "color": "black",
             "price": "150",
@@ -74,7 +74,7 @@
         },
         {
             "id": "juice10",
-            "imageURL": "https://placehold.jp/250x250.png?text=IMAGE",
+            "imageURL": "/img/milktea.webp",
             "title": "ティータイムトリート",
             "color": "brown",
             "price": "150",

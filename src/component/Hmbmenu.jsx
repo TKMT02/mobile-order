@@ -1,4 +1,4 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faBars } from '@fortawesome/free-solid-svg-icons';
@@ -14,12 +14,11 @@ export const Hmbmenu = () => {
     };
 
     const handleMenu = (e) => {
-        console.log(e);
-        if (e == "menu") {
+        if (e === "menu") {
             nav('/order');
-        } else if (e == "option") {
+        } else if (e === "option") {
             nav('/option');
-        } else if (e == "cart") {
+        } else if (e === "cart") {
             nav('/cart');
         }
     }

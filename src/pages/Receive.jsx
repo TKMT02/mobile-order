@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Notice } from '../component/Notice';
 import { ReceiveCard } from '../component/ReceiveCard';
 
 export const Receive = () => {
-    const nav = useNavigate();
     const [messages, setMessages] = useState([]);
     const [receivedMessages, setReceivedMessages] = useState(new Set());
     const [showAlert, setShowAlert] = useState(false);

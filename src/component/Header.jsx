@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Logo from '../img/logo-row.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faCartShopping, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useNavigate } from 'react-router-dom';
 import { Hmbmenu } from './Hmbmenu';
 
@@ -9,11 +9,6 @@ import { Hmbmenu } from './Hmbmenu';
 export const Header = (props) => {
 
     const navigate = useNavigate();
-    const [isModalOpen, setIsModalOpen] = useState(false);
-
-    const handleMenu = () => {
-        setIsModalOpen(true);
-    }
 
     const handleCart = () => {
         navigate("/cart");
@@ -22,8 +17,6 @@ export const Header = (props) => {
     const handleOrder = () => {
         navigate("/order");
     }
-
-    const closeModal = () => setIsModalOpen(false);
 
     return (
         <header className="header">

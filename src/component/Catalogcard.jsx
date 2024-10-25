@@ -1,6 +1,6 @@
 import React from 'react'
 
-export const Catalog_card = (props) => {
+export const Catalogcard = (props) => {
     return (
         <>
             <li className="catalog_list-item">

@@ -149,7 +149,7 @@ export const Cart = () => {
 
             console.log("サーバーからのレスポンス:", result);
 
-            if (result['status'] == 'success') {
+            if (result['status'] === 'success') {
                 nav("/done", { state: { OK: 1 } });
             }
             else {

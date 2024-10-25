@@ -1,10 +1,9 @@
 import { React, useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark } from '@fortawesome/free-regular-svg-icons';
 import { Header } from '../component/Header';
 import { Footer } from '../component/Footer';
-import { Catalog_card } from '../component/Catalog_card';
+import { Catalogcard } from '../component/Catalogcard';
 import { Topping_card } from '../component/Topping_card';
 import { Notice } from '../component/Notice';
 
@@ -27,8 +26,6 @@ export const Store = () => {
     //  一次選択ジュースと画像
     const [selectJuiceImage, setSelectJuiceImage] = useState("");
     const [selectJuiceName, setSelectJuiceName] = useState("");
-
-    const nav = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -108,7 +105,7 @@ export const Store = () => {
                 console.log(e);
                 updatedToppingFlag[e] = true;
             }); 
-            if (temp_data.length == 3) {    //  [トッピング1,トッピング2, トッピング3]
+            if (temp_data.length === 3) {    //  [トッピング1,トッピング2, トッピング3]
                 updatedToppingFlag[temp_data[0]] = false;
                 temp_data.shift();  //  [トッピング2, トッピング3]
             }
@@ -202,7 +199,7 @@ export const Store = () => {
 
             console.log("サーバーからのレスポンス:", result);
 
-            if (result['status'] == 'success') {
+            if (result['status'] === 'success') {
                 console.log("成功しました。");
             }
             else {
@@ -214,7 +211,7 @@ export const Store = () => {
             return
         } finally {
             //  カートの中をリセット
-            localStorage.setItem("cart", JSON.stringify(new Array()));
+            localStorage.setItem("cart", JSON.stringify([]));
             return
         }
     }
@@ -239,7 +236,7 @@ export const Store = () => {
                     <ul className="catalog_list">
                         {juiceData.map((item, index) => {
                             return (
-                                <Catalog_card
+                                <Catalogcard
                                     key={index}
                                     id={item.id}
                                     color={item.color}
