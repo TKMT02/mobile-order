@@ -35,7 +35,7 @@ export const ReceiveCard = ({
 // スタイル定義
 const styles = {
     card: {
-        fontSize: '36px',
+        fontSize: '18px',
         border: '1px solid #ccc',
         borderRadius: '8px',
         padding: '15px',

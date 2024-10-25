@@ -132,6 +132,7 @@ html {
         }
 
         .start_input {
+            width: 250px;
             padding: 10px 15px;
             border: none;
             border-radius: 12px;
