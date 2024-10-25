@@ -52,9 +52,7 @@ export const Order = () => {
                 }, {});
                 setToppingFlag(toppingStatus);
             } catch (error) {
-
-            } finally {
-
+                console.log(error);
             }
         }
 

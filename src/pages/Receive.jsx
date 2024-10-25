@@ -1,93 +1,128 @@
 import React, { useEffect, useState } from 'react';
+import { ReceiveCard } from '../component/ReceiveCard'; // ReceiveCardコンポーネントをインポート
 import { Notice } from '../component/Notice';
-import { ReceiveCard } from '../component/ReceiveCard';
 
 export const Receive = () => {
     const [messages, setMessages] = useState([]);
-    const [receivedMessages, setReceivedMessages] = useState(new Set());
     const [showAlert, setShowAlert] = useState(false);
+    const [noticeMsg, setNoticeMsg] = useState('');
     const [prepareFlags, setPrepareFlags] = useState({});
-    const [noticeMsg, setNoticeMsg] = useState("");
 
     useEffect(() => {
+        // SSE接続を確立
         const eventSource = new EventSource('https://craft-oshi.chu.jp/php/sse.php');
 
-        const handleMessage = (e) => {
-            try {
-                const data = JSON.parse(e.data);
-                processReceivedData(data);
-            } catch (error) {
-                console.error('受信したデータのパースに失敗しました:', error);
-            }
+        // メッセージを受信
+        eventSource.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+
+            // 新しいメッセージのIDを抽出
+            const newMessageIds = new Set(data.map(message => message.id));
+
+            // 既存のメッセージをフィルタリングして更新
+            setMessages(prevMessages => {
+                const existingIds = new Set(prevMessages.map(message => message.id));
+                const updatedMessages = data.filter(message => !existingIds.has(message.id));
+
+                // 新しいメッセージを追加し、既存のメッセージを保持
+                const mergedMessages = [
+                    ...prevMessages.filter(message => newMessageIds.has(message.id)), // DBにあるメッセージを保持
+                    ...updatedMessages // 新しいメッセージを追加
+                ];
+
+                // 新しいメッセージがある場合のみアラートを表示
+                if (updatedMessages.length > 0) {
+                    setShowAlert(true);
+                    setNoticeMsg('新しい注文が届きました！'); // アラートメッセージを設定
+                }
+                // 準備フラグを初期化
+                const flags = {};
+                updatedMessages.forEach((message) => {
+                    flags[message.id] = false; // 初期値はfalse
+                });
+                setPrepareFlags(flags);
+
+                return mergedMessages;
+            });
         };
 
-        eventSource.addEventListener('message', handleMessage);
+        // エラーハンドリング
+        eventSource.onerror = () => {
+            console.error('SSE connection error');
+            // エラーが発生した場合、再接続を試みる
+            setTimeout(() => {
+                eventSource.close();
+                eventSource = new EventSource('https://craft-oshi.chu.jp/php/sse.php');
+            }, 3000); // 3秒後に再接続
+        };
 
+        // コンポーネントがアンマウントされたときにイベントソースを閉じる
         return () => {
-            eventSource.removeEventListener('message', handleMessage);
             eventSource.close();
         };
-    }, []);
+    }, []); // 空の依存配列で初回マウント時のみ実行
 
-    const processReceivedData = (data) => {
-        // 新しいメッセージの追加（重複チェック付き）
-        if (data.new && !receivedMessages.has(data.new.id)) {
-            setMessages((prevMessages) => [...prevMessages, data.new]);
-            setReceivedMessages((prevSet) => new Set(prevSet).add(data.new.id));
-        }
-
-        // 既存メッセージの更新
-        if (data.updated) {
-            setMessages((prevMessages) =>
-                prevMessages.map((msg) =>
-                    msg.id === data.updated.id
-                        ? { ...msg, status: data.updated.status }
-                        : msg
-                )
-            );
-        }
-
-        // 完了ステータスの処理
-        if (data.status === '完了') {
-            handleCompletedMessage(data.id);
-        }
-    };
-
-    const handleCompletedMessage = (id) => {
-        setMessages((prevMessages) => prevMessages.filter((msg) => msg.id !== id));
-        setReceivedMessages((prevSet) => {
-            const newSet = new Set(prevSet);
-            newSet.delete(id);
-            return newSet;
-        });
-    };
-
+    // 受信したメッセージを処理する関数
     const handleReceived = async (id) => {
-        console.log(id);
-        const res = await fetch('https://craft-oshi.chu.jp/php/process-done.php', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id }),
-        });
+        // 受信処理の実装
+        console.log(`Received: ${id}`);
+        // 必要に応じてprepareFlagsを更新
+        //  データの更新削除
+        try {
+            const response = await fetch(`${process.env.PUBLIC_URL}/php/process-done.php`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json",
+                },
+                body: id
+            });
+            if (!response.ok) {
+                // レスポンスステータスコードが200台でない場合
+                throw new Error(`HTTPエラー ${response.status}`);
+            };
 
-        const result = await res.json();
-        handleCompletedMessage(id);
-        setNoticeMsg(result.status === 'OK' ? '完了しました。' : '失敗しました...');
-        handleAlert();
+            const result = await response.json();
+
+            console.log("サーバーからのレスポンス:", result);
+
+            if (result['status'] === 'OK') {
+                // メッセージを削除する
+                setMessages(prevMessages =>
+                    prevMessages.filter(message => message.id !== id) // IDが一致しないメッセージだけを残す
+                );
+                console.log("成功しました。");
+            }
+            else {
+                console.log("失敗しました。");
+            };
+
+        } catch (error) {
+            console.log("API通信エラー", error);
+            return
+        } finally {
+            return
+        }
     };
 
-    const handlePrepare = (id) => {
+    const handlePrepare = async (id) => {
+        // 準備処理の実装
+        console.log(`Preparing: ${id}`);
         setPrepareFlags((prevFlags) => ({
             ...prevFlags,
-            [id]: !prevFlags[id],
+            [id]: true, // 準備フラグを更新
         }));
-        console.log(id);
-        console.log(prepareFlags);
     };
 
-    const handleAlert = () => {
-        setShowAlert(true);
-        setTimeout(() => setShowAlert(false), 1500);
+    // スタイルオブジェクト
+    const styles = {
+        container: {
+            padding: '20px',
+        },
+        cardsContainer: {
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '10px',
+        },
     };
 
     return (
@@ -111,14 +146,4 @@ export const Receive = () => {
     );
 };
 
-const styles = {
-    container: {
-        padding: '20px',
-        fontFamily: 'Arial, sans-serif',
-    },
-    cardsContainer: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        gap: '20px',
-    },
-};
+

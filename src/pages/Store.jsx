@@ -18,6 +18,7 @@ export const Store = () => {
     //  注文データ処理
     const [preorderData, setPreorderData] = useState([]);
     const [cart_content, setCart_content] = useState([]);
+    const [contentNumber, setContentNumber] = useState(1);
 
     //  通知処理
     const [noticeMsg, setNoticeMsg] = useState('');
@@ -138,9 +139,7 @@ export const Store = () => {
 
     //  カートに追加
     const handleAddCart = () => {
-        const temp_cartData = cart_content;
-        temp_cartData.push(orderData);
-        setCart_content(temp_cartData);
+        const temp_cartData = [orderData];
         //  ローカルストレージに追加
         localStorage.setItem("temp_cart", JSON.stringify(temp_cartData));
         //  オーダー強制
@@ -167,7 +166,8 @@ export const Store = () => {
     const handleOrder = async () => {
 
         const UserName = "店頭注文";
-        const UserID = "HOME";
+        const UserID = "HM" + String(contentNumber).padStart(2, "0");
+        setContentNumber(contentNumber + 1);
         const userData =
         {
             "userID": UserID,
@@ -212,6 +212,7 @@ export const Store = () => {
         } finally {
             //  カートの中をリセット
             localStorage.setItem("cart", JSON.stringify([]));
+            localStorage.setItem("temp_cart", JSON.stringify([]));
             return
         }
     }

@@ -35,18 +35,20 @@ export const ReceiveCard = ({
 // スタイル定義
 const styles = {
     card: {
-        fontSize: '18px',
+        display: 'inline-block',
+        fontSize: '24px',
         border: '1px solid #ccc',
         borderRadius: '8px',
         padding: '15px',
-        width: '300px',
+        width: '35px',
         boxShadow: '2px 2px 12px rgba(0,0,0,0.1)',
     },
     P_card: {
         border: '1px solid #ccc',
         borderRadius: '8px',
+        fontSize: '24px',
         padding: '15px',
-        width: '300px',
+        width: '350px',
         boxShadow: '2px 2px 12px rgba(0,0,0,0.1)',
         backgroundColor: '#bce2e8',
     },
