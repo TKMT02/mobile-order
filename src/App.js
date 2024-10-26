@@ -10,6 +10,7 @@ import { Monitor } from './pages/Monitor';
 import { Done } from './pages/Done';
 import { Store } from './pages/Store';
 import { Receive } from './pages/Receive';
+import { End } from './pages/End';
 
 function App() {
 
@@ -38,6 +39,7 @@ function App() {
                     <Route path="/done" element={<Done />} />
                     <Route path="/store" element={<Store />} />
                     <Route path="/res" element={<Receive />} />
+                    <Route path="/end" element={<End />} />
                 </Routes>
             </BrowserRouter>
             {/* } */}

@@ -35,12 +35,6 @@ export const Receive = () => {
                     setShowAlert(true);
                     setNoticeMsg('新しい注文が届きました！'); // アラートメッセージを設定
                 }
-                // 準備フラグを初期化
-                const flags = {};
-                updatedMessages.forEach((message) => {
-                    flags[message.id] = false; // 初期値はfalse
-                });
-                setPrepareFlags(flags);
 
                 return mergedMessages;
             });
@@ -105,12 +99,48 @@ export const Receive = () => {
     };
 
     const handlePrepare = async (id) => {
-        // 準備処理の実装
-        console.log(`Preparing: ${id}`);
         setPrepareFlags((prevFlags) => ({
             ...prevFlags,
             [id]: true, // 準備フラグを更新
         }));
+        // 受信処理の実装
+        console.log(`Received: ${id}`);
+        // 必要に応じてprepareFlagsを更新
+        //  データの更新削除
+        try {
+            const response = await fetch(`${process.env.PUBLIC_URL}/php/process-prepare.php`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': "application/json",
+                },
+                body: id
+            });
+            if (!response.ok) {
+                // レスポンスステータスコードが200台でない場合
+                throw new Error(`HTTPエラー ${response.status}`);
+            };
+
+            const result = await response.json();
+
+            console.log("サーバーからのレスポンス:", result);
+
+            if (result['status'] === 'OK') {
+                // メッセージを削除する
+                setMessages(prevMessages =>
+                    prevMessages.filter(message => message.id !== id) // IDが一致しないメッセージだけを残す
+                );
+                console.log("成功しました。");
+            }
+            else {
+                console.log("失敗しました。");
+            };
+
+        } catch (error) {
+            console.log("API通信エラー", error);
+            return
+        } finally {
+            return
+        }
     };
 
     // スタイルオブジェクト
@@ -120,7 +150,7 @@ export const Receive = () => {
         },
         cardsContainer: {
             display: 'flex',
-            flexDirection: 'row',
+            flexDirection: 'column',
             gap: '10px',
         },
     };

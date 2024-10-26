@@ -6,44 +6,44 @@ export const Monitor = () => {
     const [messages, setMessages] = useState([]);
 
     useEffect(() => {
-        const eventSource = new EventSource('https://craft-oshi.chu.jp/php/sse.php');
+        let eventSource = new EventSource('https://craft-oshi.chu.jp/php/sse_monitor.php');
 
-        eventSource.onmessage = (event) => {
-            const data = JSON.parse(event.data);
+        const connect = () => {
+            eventSource = new EventSource('https://craft-oshi.chu.jp/php/sse_monitor.php');
 
-            // 新しいメッセージのIDを抽出
-            const newMessageIds = new Set(data.map(message => message.id));
+            eventSource.onmessage = (event) => {
+                const data = JSON.parse(event.data);
 
-            // 既存のメッセージをフィルタリングして更新
-            setMessages(prevMessages => {
-                const existingIds = new Set(prevMessages.map(message => message.id));
-                const updatedMessages = data.filter(message => !existingIds.has(message.id));
+                const newMessageIds = new Set(data.map(message => message.id));
 
-                // 新しいメッセージを追加し、既存のメッセージを保持
-                return [
-                    ...prevMessages.filter(message => newMessageIds.has(message.id)), // DBにあるメッセージを保持
-                    ...updatedMessages // 新しいメッセージを追加
-                ];
-            });
-        };
+                setMessages(prevMessages => {
+                    const existingIds = new Set(prevMessages.map(message => message.id));
+                    const updatedMessages = data.filter(message => !existingIds.has(message.id));
 
-        eventSource.onerror = () => {
-            console.error('SSE connection error');
-            // エラーが発生した場合、再接続を試みる
-            setTimeout(() => {
+                    return [
+                        ...prevMessages.filter(message => newMessageIds.has(message.id)),
+                        ...updatedMessages,
+                    ];
+                });
+            };
+
+            eventSource.onerror = () => {
+                console.error('SSE connection error');
                 eventSource.close();
-                eventSource = new EventSource('https://craft-oshi.chu.jp/php/sse.php');
-            }, 3000); // 3秒後に再接続
+                setTimeout(connect, 3000); // 3秒後に再接続
+            };
         };
+
+        connect();
 
         return () => {
-            eventSource.close();
+            if (eventSource) eventSource.close(); // クリーンアップで接続を終了
         };
-    }, []); // 空の依存配列で初回マウント時のみ実行
+    }, []);
 
     return (
         <div>
-            <h1 className='monitor-title'>お待ちのお客様 -注文モニター-</h1>
+            <h1 className='monitor-title'>お呼び出し番号 -注文モニター-</h1>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {messages.map((row) => (

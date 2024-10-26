@@ -87,9 +87,6 @@ export const Option = () => {
                 </h2>
                 <ul className="paylist">
                     <li className="paylist-item">
-                        <p className='text'>PayPay</p>
-                    </li>
-                    <li className="paylist-item">
                         <p className='text'>現金</p>
                     </li>
                 </ul>
